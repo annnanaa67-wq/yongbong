@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DEAD ZONE: 용봉</title>
+<style>
+:root{--bg:#0b0e12;--panel:#141a21;--panel2:#1b232d;--text:#e8edf2;--muted:#9aa8b5;--red:#e34c4c;--amber:#e5a84b;--green:#50c78a;--line:#2c3946}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#18212b 0,#0b0e12 58%);color:var(--text);font-family:system-ui,-apple-system,"Malgun Gothic",sans-serif;line-height:1.55}
+main{max-width:960px;margin:auto;padding:22px 16px 48px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:16px}
+.logo{font-weight:900;letter-spacing:.12em;font-size:clamp(1.25rem,4vw,2rem)}.logo span{color:var(--red)}.tag{font-size:.72rem;letter-spacing:.1em;border:1px solid #773b3b;color:#ff8e8e;padding:5px 9px;border-radius:999px}
+.hero{margin:20px 0 18px;min-height:185px;border:1px solid var(--line);border-radius:16px;padding:24px;background:linear-gradient(110deg,rgba(8,10,13,.94),rgba(13,20,27,.72)),repeating-linear-gradient(135deg,#202b35 0 2px,#111820 2px 8px);display:flex;flex-direction:column;justify-content:end}
+.kicker{color:var(--red);font-size:.76rem;font-weight:800;letter-spacing:.16em}.hero h1{margin:7px 0;font-size:clamp(1.8rem,5vw,3rem);line-height:1.1}.hero p{margin:7px 0 0;color:#b5c0c9;max-width:650px}
+.layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(250px,1fr);gap:16px;align-items:start}
+.panel{background:rgba(20,26,33,.94);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}.panel h2,.panel h3{margin:0 0 12px}.chapter{font-size:.75rem;color:var(--amber);font-weight:800;letter-spacing:.1em}.scene-title{font-size:1.45rem;margin:5px 0 14px}.story p{margin:0 0 12px}.alert{background:#2a191b;border-left:3px solid var(--red);padding:12px 14px;border-radius:6px;margin:14px 0}.choices{display:grid;gap:9px;margin-top:16px}.choice{display:flex;gap:12px;text-align:left;width:100%;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:13px;cursor:pointer;transition:.15s;font:inherit}.choice:hover{border-color:var(--amber);transform:translateY(-1px)}.letter{flex:0 0 34px;height:34px;display:grid;place-items:center;border-radius:8px;background:#293542;font-weight:900}.choice small{display:block;color:var(--muted);margin-top:3px}.stats{display:grid;gap:13px}.stathead{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:5px}.bar{height:8px;background:#2b3540;border-radius:99px;overflow:hidden}.fill{height:100%;width:50%;transition:width .2s}.inventory{display:flex;flex-wrap:wrap;gap:7px}.item{background:#222d37;border:1px solid #344452;border-radius:999px;padding:5px 9px;font-size:.82rem}.muted{color:var(--muted);font-size:.88rem}.statusline{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #26313c}.statusline:last-child{border:0}.log{max-height:180px;overflow:auto;font-size:.83rem;color:var(--muted)}.log div{padding:6px 0;border-bottom:1px solid #26313c}.btn{border:1px solid var(--line);background:#202a34;color:var(--text);border-radius:9px;padding:10px 13px;cursor:pointer;font:inherit}.btn:hover{border-color:var(--amber)}.btn.danger{border-color:#713939;color:#ffb0b0}.ending{text-align:center;padding:22px 8px}.ending h2{font-size:2rem}.footer{text-align:center;color:#64727f;font-size:.76rem;margin-top:18px}
+@media(max-width:720px){.layout{grid-template-columns:1fr}.hero{min-height:160px;padding:19px}.panel{padding:15px}.side{display:grid;grid-template-columns:1fr 1fr;gap:12px}.side .panel{margin-bottom:0}.side .panel:last-child{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<main>
+<header class="top"><div class="logo">DEAD ZONE<span>:</span> 용봉</div><div class="tag">TEXT SURVIVAL · EPISODE 01</div></header>
+<section class="hero"><div class="kicker">GWANGJU · OCT 28, 2026</div><h1>도시는 이미 무너지고 있다.</h1><p>살아남는 건 네 선택에 달렸다. 소리를 조심하고, 물자를 확보하고, 누구를 믿을지 결정하라.</p></section>
+<div class="layout">
+<section>
+<div class="panel" id="storyPanel">
+<div class="chapter" id="chapter">EPISODE 01 · 오전 11시 17분</div>
+<h2 class="scene-title" id="sceneTitle">현관문 너머</h2>
+<div class="story" id="story"></div>
+<div class="choices" id="choices"></div>
+</div>
+<div class="panel"><h3>생존 기록</h3><div class="log" id="log"></div></div>
+</section>
+<aside class="side">
+<div class="panel"><h3>생존 상태</h3><div class="stats" id="stats"></div><div class="statusline"><span>감염 위험</span><strong id="infection">없음</strong></div><div class="statusline"><span>현재 위치</span><strong id="location">용봉동 원룸</strong></div><div class="statusline"><span>경과 시간</span><strong id="time">00:00</strong></div></div>
+<div class="panel"><h3>소지품</h3><div class="inventory" id="inventory"></div><p class="muted" id="inventoryNote">주변을 조사해 생존 물자를 확보하세요.</p></div>
+<div class="panel"><h3>게임 메뉴</h3><button class="btn" id="saveBtn">상태 내보내기</button> <button class="btn danger" id="restartBtn">처음부터</button><p class="muted">이 파일은 브라우저에서 단독 실행됩니다. 선택과 상태는 이 화면에서 이어집니다.</p></div>
+</aside>
+</div>
+<div class="footer">FICTIONAL INTERACTIVE STORY · DEAD ZONE: 용봉</div>
+</main>
+<script>
+const initialState=()=>({health:100,hunger:20,thirst:10,noise:12,infection:0,location:"용봉동 원룸",minutes:0,inventory:["휴대폰","지갑","노트북"],flags:{},log:["11:17 — 긴급재난문자 수신.","현관문 너머에서 정체불명의 존재가 문을 두드린다."]});
+let s=initialState(), current="start", ended=false;
+const scenes={
+start:{chapter:"EPISODE 01 · 오전 11시 17분",title:"현관문 너머",body:`<p>2026년 10월 28일. 용봉동의 평범한 원룸. 휴대폰에 긴급재난문자가 도착한다. 북구 일대에서 원인 미상의 폭력 사태가 발생했으니 외출을 자제하라는 내용이다.</p><div class="alert"><b>긴급재난문자</b><br>북구 일대에서 원인 미상의 폭력 사태가 발생했습니다. 시민 여러분은 실내에 머물러 주시기 바랍니다.</div><p>밖에서 비명이 들린다. 잠시 뒤, 현관 손잡이가 철컥 돌아간다. 문은 잠겨 있다. 문 너머에서 누군가 중얼거린다.</p><p><b>“……열어……줘……”</b></p><p>쿵! 현관문이 크게 흔들린다.</p>`,choices:[
+["A","문 너머의 정체를 확인한다","문구멍으로 살펴보고 말을 건다.", "door"],
+["B","원룸 안을 빠르게 수색한다","부엌과 서랍에서 쓸 만한 물건을 찾는다.","search"],
+["C","창문으로 바깥을 살핀다","도로와 주변 건물의 상황을 확인한다.","window"],
+["D","휴대폰으로 정보를 찾는다","뉴스와 커뮤니티, 지인 연락을 확인한다.","phone"]]},
+door:{chapter:"EPISODE 01 · 첫 번째 접촉",title:"문구멍 너머",body:`<p>너는 숨을 죽이고 현관으로 다가간다. 문구멍에 눈을 대자 복도 조명이 깜빡인다.</p><p>한 남자가 문 앞에 서 있다. 셔츠에는 검붉은 얼룩이 있고, 고개는 이상한 각도로 기울어져 있다. 남자는 문을 두드리는 대신 이마를 문에 대고 천천히 문지른다.</p><p>“……배고파……”</p><p>그의 시선이 문구멍 쪽으로 움직인다. 정말 너를 보고 있는 걸까?</p>`,choices:[["A","문을 열지 않고 말을 건다","상대의 반응을 확인한다.","talk"],["B","조용히 물러나 부엌을 수색한다","지금은 거리를 두는 게 낫다.","search"],["C","현관에서 떨어져 창문으로 간다","다른 탈출로가 있는지 살핀다.","window"],["D","휴대폰으로 긴급 신고를 시도한다","도움을 요청한다.","phone"]]},
+search:{chapter:"EPISODE 01 · 물자 확보",title:"작은 원룸, 작은 기회",body:`<p>너는 문에서 떨어져 부엌과 수납장을 뒤진다. 손이 떨려 물건을 떨어뜨릴 뻔했지만, 다행히 소리를 크게 내지는 않았다.</p><p>확보한 물건은 생수 한 병, 즉석밥 두 개, 작은 손전등, 구급상자다. 현관 쪽에서는 간헐적으로 문을 긁는 소리가 이어진다.</p>`,effect:{add:["생수","즉석밥 ×2","손전등","구급상자"],hunger:-2,minutes:5,log:"원룸을 수색해 기본 생존 물자를 확보했다."},choices:[["A","휴대폰으로 정보를 확인한다","사태의 규모를 파악한다.","phone"],["B","창문으로 바깥을 살핀다","주변 도로와 탈출 가능성을 확인한다.","window"],["C","문 앞에 가구를 밀어 둔다","시간을 벌 수 있을지 모른다.","barricade"],["D","불을 끄고 조용히 기다린다","상황이 지나가기를 기다린다.","wait"]]},
+window:{chapter:"EPISODE 01 · 바깥 상황",title:"용봉동의 거리",body:`<p>커튼을 조금 걷자 익숙한 거리가 낯설게 보인다. 도로 한복판에 차 한 대가 비스듬히 멈춰 있고, 멀리서 사람들이 사방으로 뛰어간다.</p><p>편의점 앞에는 무언가를 두고 실랑이하는 사람들이 보인다. 그중 한 사람이 갑자기 다른 사람에게 달려들고, 주변은 순식간에 혼란에 빠진다.</p><p>아래층에서 유리 깨지는 소리가 들린다. 창문을 오래 열어 두는 건 위험할 수 있다.</p>`,effect:{noise:3,minutes:3,log:"창문 너머로 거리의 혼란과 폭력 사태를 목격했다."},choices:[["A","휴대폰으로 정보를 확인한다","공식 안내와 지역 소식을 확인한다.","phone"],["B","부엌과 수납장을 수색한다","물과 식량부터 확보한다.","search"],["C","현관문을 보강한다","침입에 대비한다.","barricade"],["D","창문에서 떨어져 숨을 죽인다","소리를 내지 않고 상황을 살핀다.","wait"]]},
+phone:{chapter:"EPISODE 01 · 연결 불안정",title:"끊기는 신호",body:`<p>인터넷은 느리지만 접속된다. 지역 커뮤니티에는 짧은 영상과 확인되지 않은 소문이 쏟아진다. 몇몇 게시물은 물린 사람들이 갑자기 공격적으로 변했다고 주장한다.</p><p>공식 안내는 실내 대피를 권고할 뿐, 원인이나 대피 장소는 밝히지 않는다. 친구에게 전화를 걸어 보지만 통화 연결음만 길게 이어진다.</p><div class="alert"><b>속보</b><br>북구 일부 지역에서 신고가 폭증했습니다. 확인되지 않은 정보의 확산을 자제하고 실내에 머물러 주십시오.</div><p>배터리는 아직 충분하다. 하지만 통신이 언제 끊길지는 알 수 없다.</p>`,effect:{minutes:4,log:"휴대폰으로 사태 관련 정보를 확인했지만 공식 정보는 부족했다."},choices:[["A","부엌에서 물자부터 확보한다","준비 없이 움직일 수는 없다.","search"],["B","창문으로 안전한 방향을 확인한다","주변 상황을 더 파악한다.","window"],["C","문을 보강하고 은신한다","당장 밖으로 나가지 않는다.","barricade"],["D","이웃에게 메시지를 보낸다","주변에 생존자가 있는지 확인한다.","neighbor"]]},
+talk:{chapter:"EPISODE 01 · 위험한 대화",title:"대답 없는 대답",body:`<p>“괜찮으세요? 무슨 일이에요?” 네가 묻자 문 너머의 남자가 멈춘다.</p><p>몇 초간 침묵. 그리고 낮고 쉰 목소리가 들린다.</p><p>“문…… 열어……”</p><p>다음 순간 남자는 문에 몸을 부딪친다. 쿵! 쿵! 손잡이가 거칠게 흔들린다. 대화는 더 이상 의미가 없어 보인다.</p>`,effect:{noise:8,minutes:2,log:"문 너머의 존재에게 말을 걸었지만 반응은 더 거칠어졌다."},choices:[["A","방 안쪽으로 물러나 물자를 찾는다","거리를 벌리고 준비한다.","search"],["B","문을 보강한다","침입을 늦춘다.","barricade"],["C","휴대폰으로 신고한다","외부에 도움을 요청한다.","phone"],["D","불을 끄고 숨을 죽인다","존재가 떠나기를 기다린다.","wait"]]},
+barricade:{chapter:"EPISODE 01 · 임시 방어",title:"문 앞의 가구",body:`<p>너는 책상 의자와 작은 수납장을 현관 쪽으로 끌어 놓는다. 가구가 바닥을 긁으며 소리를 내지만, 문 앞에 임시 장애물이 생겼다.</p><p>문을 치는 소리가 한동안 이어지더니 잠시 멎는다. 완벽한 방어는 아니지만 시간을 벌었을 가능성이 있다.</p>`,effect:{noise:8,minutes:6,log:"가구를 옮겨 현관 앞에 임시 장애물을 만들었다.",flag:"barricaded"},choices:[["A","조용히 물자를 수색한다","생존에 필요한 물건을 챙긴다.","search"],["B","휴대폰으로 소식을 확인한다","상황을 더 알아본다.","phone"],["C","창문으로 대피 가능성을 살핀다","다른 경로가 있는지 확인한다.","window"],["D","불을 끄고 기다린다","움직임을 최소화한다.","wait"]]},
+wait:{chapter:"EPISODE 01 · 정적",title:"숨소리만 들리는 방",body:`<p>너는 불을 끄고 방 안쪽에 앉아 숨을 고른다. 몇 분이 지나자 문을 두드리는 소리가 약해진다.</p><p>완전히 떠난 건지, 단지 조용해진 건지는 알 수 없다. 멀리서 사이렌이 들리지만 점점 끊겨 간다. 기다리는 동안 갈증과 불안이 조금씩 커진다.</p>`,effect:{minutes:10,thirst:4,log:"불을 끄고 조용히 기다렸다. 바깥 소리는 잠시 잦아들었다."},choices:[["A","물자를 수색한다","더 늦기 전에 준비한다.","search"],["B","휴대폰으로 정보를 확인한다","상황을 파악한다.","phone"],["C","창문으로 밖을 확인한다","대피 가능성을 살핀다.","window"],["D","문을 보강한다","다시 접근할 상황에 대비한다.","barricade"]]},
+neighbor:{chapter:"EPISODE 01 · 생존자?",title:"짧은 답장",body:`<p>메시지가 전송되는 데 한참이 걸린다. 마침내 답장이 하나 도착한다.</p><div class="alert">“나 3층인데 복도에 이상한 사람이 있어. 문 열지 마. 경찰도 안 오는 것 같아.”</div><p>보낸 사람은 같은 건물에 사는 이웃으로 보인다. 이어서 메시지가 하나 더 온다.</p><p>“혹시 물이나 약 있어? 나 혼자야.”</p><p>도움이 필요할 수도 있지만, 지금 누구를 믿어야 할까?</p>`,effect:{minutes:3,log:"같은 건물의 이웃으로부터 복도에 위험한 사람이 있다는 메시지를 받았다."},choices:[["A","이웃에게 문을 잠그고 기다리라고 한다","서로 안전을 우선한다.","neighborSafe"],["B","물자를 확보한 뒤 상황을 다시 판단한다","성급하게 움직이지 않는다.","search"],["C","이웃에게 자세한 상황을 묻는다","위험과 정보를 더 확인한다.","phone"],["D","메시지를 멈추고 은신한다","자신의 안전부터 지킨다.","wait"]]},
+neighborSafe:{chapter:"EPISODE 01 · 연락 유지",title:"문 너머의 이웃",body:`<p>“문 열지 말고 잠금장치 확인해요. 복도에 나오지 말고 조용히 있어요.” 메시지를 보낸다.</p><p>이웃은 짧게 “알겠어요”라고 답한다. 적어도 당장 무모하게 복도로 나갈 이유는 줄었다. 하지만 둘 다 서로의 상태를 직접 확인할 수는 없다.</p>`,effect:{minutes:2,log:"이웃에게 문을 열지 말고 안전한 곳에서 기다리라고 알렸다.",flag:"neighbor_contact"},choices:[["A","부엌을 수색한다","물과 식량을 확보한다.","search"],["B","바깥을 관찰한다","안전한 이동 경로를 찾는다.","window"],["C","현관을 보강한다","방어를 강화한다.","barricade"],["D","뉴스를 확인한다","공식 대피 안내를 기다린다.","phone"]]}
+};
+function addLog(t){s.log.unshift(`${fmtTime()} — ${t}`);if(s.log.length>12)s.log.pop()}
+function fmtTime(){let m=17+s.minutes;return `${String(11+Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`}
+function applyEffect(e){if(!e)return;for(const k of ["health","hunger","thirst","noise","infection","minutes"])if(e[k])s[k]=Math.max(0,Math.min(k==="health"?100:k==="hunger"||k==="thirst"?100:k==="infection"?100:999,s[k]+e[k]));if(e.add)e.add.forEach(x=>{if(!s.inventory.includes(x))s.inventory.push(x)});if(e.remove)s.inventory=s.inventory.filter(x=>!e.remove.includes(x));if(e.flag)s.flags[e.flag]=true;if(e.log)addLog(e.log)}
+function render(){let sc=scenes[current];document.getElementById("chapter").textContent=sc.chapter;document.getElementById("sceneTitle").textContent=sc.title;document.getElementById("story").innerHTML=sc.body;let ch=document.getElementById("choices");ch.innerHTML="";sc.choices.forEach(([l,t,d,to])=>{let b=document.createElement("button");b.className="choice";b.innerHTML=`<span class="letter">${l}</span><span><b>${t}</b><small>${d}</small></span>`;b.onclick=()=>go(to);ch.appendChild(b)});drawStats();document.getElementById("inventory").innerHTML=s.inventory.map(i=>`<span class="item">${i}</span>`).join("")||'<span class="muted">비어 있음</span>';document.getElementById("inventoryNote").textContent=s.inventory.includes("생수")?"생수 확보: 갈증 관리에 도움이 될 수 있습니다.":"주변을 조사해 생존 물자를 확보하세요.";document.getElementById("log").innerHTML=s.log.map(x=>`<div>${x}</div>`).join("");document.getElementById("location").textContent=s.location;document.getElementById("time").textContent=`${String(Math.floor(s.minutes/60)).padStart(2,"0")}:${String(s.minutes%60).padStart(2,"0")}`;document.getElementById("infection").textContent=s.infection===0?"없음":s.infection<30?"낮음":s.infection<70?"주의":"위험"}
+function drawStats(){const items=[["체력",s.health,"#50c78a"],["허기",s.hunger,"#e5a84b"],["갈증",s.thirst,"#59b8ed"],["소음 노출",s.noise,"#e34c4c"]];document.getElementById("stats").innerHTML=items.map(([n,v,c])=>`<div><div class="stathead"><span>${n}</span><b>${v}/100</b></div><div class="bar"><div class="fill" style="width:${v}%;background:${c}"></div></div></div>`).join("")}
+function go(to){if(ended)return;const previous=current;current=to;let sc=scenes[to];if(sc.effect)applyEffect(sc.effect);else addLog(sc.title+" 상황을 확인했다.");if(s.noise>=30&&!s.flags.noiseWarned){s.flags.noiseWarned=true;addLog("주변의 소음이 커졌다. 무언가를 끌어들였을지도 모른다.")}if(s.minutes>=35&&!s.flags.timeWarned){s.flags.timeWarned=true;addLog("사태 발생 후 시간이 흐르고 있다. 오래 머물수록 선택지가 줄어들 수 있다.")}render()}
+document.getElementById("restartBtn").onclick=()=>{if(confirm("진행 상황을 초기화하고 처음부터 시작할까요?")){s=initialState();current="start";ended=false;render()}};
+document.getElementById("saveBtn").onclick=()=>{const data=JSON.stringify({state:s,scene:current},null,2);const blob=new Blob([data],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="dead-zone-yongbong-save.json";a.click();URL.revokeObjectURL(a.href)};
+render();
+</script>
+</body>
+</html>
